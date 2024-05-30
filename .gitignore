@@ -1,5 +1,5 @@
 __pycache__/
-.ipynb/
+*.ipynb/
 source
 trash
 examples*
@@ -8,4 +8,4 @@ build
 *.egg-info/
 *.zip
 .DS_Store
-test.ipynb
+*.ipynb
