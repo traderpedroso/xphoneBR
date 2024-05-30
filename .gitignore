@@ -1,0 +1,10 @@
+__pycache__/
+.ipynb/
+source
+trash
+examples*
+.env
+build
+*.egg-info/
+*.zip
+.DS_Store
