@@ -8,3 +8,4 @@ build
 *.egg-info/
 *.zip
 .DS_Store
+test.ipynb
