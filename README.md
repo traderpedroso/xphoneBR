@@ -56,7 +56,7 @@ output: 'dowˈtoɾə. ˈãnə ˈtẽ kwaˈɾẽtə ˈi ˈsĩkʊ ˈpox ˈsẽt�
 from xphonebr import Phonemizer
 
 
-phones = Phonemizer(autoreg=False, normalizer=True) 
+phones = Phonemizer(autoreg=True, normalizer=True) 
 
 phones.process_text("Dra. Ana tem 45% da empresa & cia e iniciou as 8:45 de quinta feira do ano 2024 etc.  ")
 
