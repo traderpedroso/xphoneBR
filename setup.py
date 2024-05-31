@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-long_description = """XphoneBR is a portuguese transformer base grapheme-to-phoneme normalization and tokenization tool modeling library that leverages recent deep learning 
+long_description = """XphoneBR is a portuguese transformer base grapheme-to-phoneme normalization  tool modeling library that leverages recent deep learning 
 technology and is optimized for usage in production systems such as TTS. In particular, the library should
 be accurate, fast, easy to use. 
 

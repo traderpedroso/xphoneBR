@@ -19,7 +19,7 @@ else:
     raise ValueError("Could not find version in setup.py")
 
 # Acessa o repositório atual
-g = Github(os.getenv("GITHUB_TOKEN"))
+g = Github(os.getenv("GIT_TOKEN"))
 repo = g.get_repo(os.getenv("GITHUB_REPOSITORY"))
 
 # Busca a última release
