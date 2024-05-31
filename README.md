@@ -14,7 +14,7 @@ counterpart. The former is faster and more stable while the latter is slightly m
 
 - [x] G2P
 - [x] Normalization
-- [] Bert Tokenizer
+- [ ] Bert Tokenizer
 
 
 ## Prerequisites
