@@ -45,7 +45,7 @@ from xphonebr import Phonemizer
 
 phones = Phonemizer(normalizer=True) 
 
-phones.process_text("Dra. Ana tem 45% da empresa & cia e iniciou as 8:45 de quinta feira do ano 2024 etc.  ")
+phones.phonemise("Dra. Ana tem 45% da empresa & cia e iniciou as 8:45 de quinta feira do ano 2024 etc.  ")
 
 output: 'dowˈtoɾə. ˈãnə ˈtẽ kwaˈɾẽtə ˈi ˈsĩkʊ ˈpox ˈsẽtʊ ˈda ẽˈpɾɛzə ˈi kõpãˈiə ˈi inisiˈow ˈas ˈoytʊ ˈɔɾəs ˈi kwaˈɾẽtə ˈi ˈsĩkʊ miˈnutʊs ˈdʒi ˈkĩtə ˈfeyɾə ˈdʊ ˈãnʊ ˈdoys ˈmiw ˈi ˈvĩtʃɪ ˈi ˈkwatɾʊ ˈit seˈteɾə.'
 
@@ -58,7 +58,7 @@ from xphonebr import Phonemizer
 
 phones = Phonemizer(autoreg=True, normalizer=True) 
 
-phones.process_text("Dra. Ana tem 45% da empresa & cia e iniciou as 8:45 de quinta feira do ano 2024 etc.  ")
+phones.phonemise("Dra. Ana tem 45% da empresa & cia e iniciou as 8:45 de quinta feira do ano 2024 etc.  ")
 
 output: 'dowˈtoɾə. ˈãnə ˈtẽ kwaˈɾẽtə ˈi ˈsĩkʊ ˈpox ˈsẽtʊ ˈda ẽˈpɾɛzə ˈi kõpãˈiə ˈi inisiˈow ˈas ˈoytʊ ˈɔɾəs ˈi kwaˈɾẽtə ˈi ˈsĩkʊ miˈnutʊs ˈdʒi ˈkĩtə ˈfeyɾə ˈdʊ ˈãnʊ ˈdoys ˈmiw ˈi ˈvĩtʃɪ ˈi ˈkwatɾʊ ˈit seˈteɾə.'
 

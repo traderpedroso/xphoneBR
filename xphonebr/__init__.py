@@ -51,7 +51,14 @@ class Phonemizer:
 
         return model_path
 
-    def process_text(self, text):
-        if self.norm:
-            text = normalizer(text)
-        return self.phones(text, lang="pt_br")
+    def phonemise(self, text):
+        if isinstance(text, list):
+            # Se for uma lista, normalizar e fonemizar cada item
+            if self.norm:
+                text = [normalizer(t) for t in text]
+            return self.phones.phonemise_list(text, lang="pt_br")
+        else:
+            # Se for uma string, normalizar e fonemizar diretamente
+            if self.norm:
+                text = normalizer(text)
+            return self.phones(text, lang="pt_br")
