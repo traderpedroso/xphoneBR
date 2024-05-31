@@ -109,14 +109,12 @@ def remove_aux_symbols(text):
     return text
 
 
-# Função para normalizar porcentagens
 def _normalize_percentages(text):
     return re.sub(
         r"(\d+)%", lambda m: num2words(m.group(1), lang="pt") + " por cento", text
     )
 
 
-# Função para normalizar horas
 def _normalize_time(text):
     def time_to_words(match):
         hours = int(match.group(1))
@@ -135,25 +133,27 @@ def _normalize_time(text):
     return re.sub(r"(\d{1,2}):(\d{2})", time_to_words, text)
 
 
-# Função para normalizar valores monetários
 def _normalize_money(text):
     def money_to_words(match):
-        integer_part = int(match.group(1).replace(".", ""))
-        cents = int(match.group(2))
-        integer_part_text = num2words(integer_part, lang="pt") + (
-            " reais" if integer_part > 1 else " real"
-        )
-        if cents == 0:
-            return integer_part_text
-        cents_text = (
-            num2words(cents, lang="pt") + " centavo" + ("s" if cents > 1 else "")
-        )
-        return f"{integer_part_text} e {cents_text}"
+        currency = match.group(1)
+        amount = int(match.group(2).replace(".", ""))
+        currency_text = {
+            "R$": "reais" if amount > 1 else "real",
+            "$": "dólares" if amount > 1 else "dólar",
+            "€": "euros",
+            "£": "libras",
+        }.get(currency, "reais")
 
-    return re.sub(r"R\$ (\d+[\.\d]*),(\d{2})", money_to_words, text)
+        amount_text = num2words(amount, lang="pt")
+        return f"{amount_text} {currency_text}"
+
+    # Regular expressions for different currency formats
+    text = re.sub(r"(R\$|€|£|\$) (\d+[\.\d]*)", money_to_words, text)
+    text = re.sub(r"(R\$|€|£|\$)(\d+[\.\d]*)", money_to_words, text)
+    text = re.sub(r"R\$ (\d+[\.\d]*),(\d{2})", money_to_words, text)
+    return text
 
 
-# Função para converter todos os números isolados no texto para palavras
 def _normalize_numbers(text):
     return re.sub(r"\b\d+\b", lambda x: num2words(x.group(), lang="pt"), text)
 
@@ -164,10 +164,34 @@ def _normalize_abbreviations(text):
     return text
 
 
+def _normalize_am_pm_times(text):
+    def am_pm_to_words(match):
+        hours = int(match.group(1))
+        period = match.group(2).lower()
+        if period == "pm" and hours != 12:
+            hours += 12
+        elif period == "am" and hours == 12:
+            hours = 0
+        hours_text = num2words(hours, lang="pt", to="cardinal")
+        return f"{hours_text} horas"
+
+    return re.sub(r"(\d{1,2})(am|pm)", am_pm_to_words, text)
+
+
+def _normalize_numbers_with_letters(text):
+    return re.sub(
+        r"(\d+)([a-zA-Z]+)",
+        lambda m: f"{num2words(m.group(1), lang='pt')} {m.group(2)}",
+        text,
+    )
+
+
 def normalizer(text):
     text = _normalize_percentages(text)
     text = _normalize_time(text)
     text = _normalize_money(text)
+    text = _normalize_am_pm_times(text)
+    text = _normalize_numbers_with_letters(text)
     text = _normalize_numbers(text)
     text = _normalize_abbreviations(text)
     text = replace_punctuation(text)
