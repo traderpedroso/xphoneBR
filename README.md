@@ -1,7 +1,7 @@
 ![Pypi Publish](https://github.com/traderpedroso/xphoneBR/actions/workflows/python-publish.yml/badge.svg)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/traderpedroso/xphoneBR)
 [![License](https://img.shields.io/github/license/traderpedroso/xphoneBR)](https://github.com/traderpedroso/xphoneBR/blob/master/LICENSE)
-[![PyPi downloads](https://img.shields.io/pypi/dm/xphoneBR?style=flat-square&logo=pypi&logoColor=white)](https://pypi.org/project/xphoneBR/)
+[![PyPi downloads](https://img.shields.io/pypi/dm/xphonebr?style=flat-square&logo=pypi&logoColor=white)](https://pypi.org/project/xphonebr/)
 
 # Python Phonemizer Brazilian portuguese 
 
