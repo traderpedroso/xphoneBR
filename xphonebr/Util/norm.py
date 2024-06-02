@@ -41,7 +41,7 @@ rep_map = {
 
 # Lista de pares (expressão regular, substituição) para abreviações em português do Brasil:
 abbreviations = [
-    (re.compile(r"\b%s\b" % x[0], re.IGNORECASE), x[1])
+    (re.compile(r"\b%s\b" % re.escape(x[0]), re.IGNORECASE), x[1])
     for x in [
         ("sr", "senhor"),
         ("sra", "senhora"),
@@ -159,8 +159,8 @@ def _normalize_numbers(text):
 
 
 def _normalize_abbreviations(text):
-    for regex, substitutions in abbreviations:
-        text = re.sub(regex, substitutions, text)
+    for regex, substitution in abbreviations:
+        text = regex.sub(substitution, text)
     return text
 
 
