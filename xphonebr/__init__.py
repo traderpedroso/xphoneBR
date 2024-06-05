@@ -4,6 +4,7 @@ from tqdm import tqdm
 from dp.phonemizer import Phonemizer as ph
 import warnings
 from .Util.norm import normalizer
+import torch
 
 # Suprimir o aviso específico
 warnings.filterwarnings(
@@ -11,11 +12,13 @@ warnings.filterwarnings(
     message="enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.self_attn.batch_first was not True",
 )
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 class Phonemizer:
     def __init__(self, autoreg=False, normalizer=False):
         self.model_path = self.download_model(autoreg)
-        self.phones = ph.from_checkpoint(self.model_path)
+        self.phones = ph.from_checkpoint(self.model_path, device=device)
         self.norm = normalizer
 
     def download_model(self, autoreg):
