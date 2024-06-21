@@ -7,10 +7,10 @@ be accurate, fast, easy to use.
 DeepPhonemizerBR is compatible with Python 3.6+ and is distributed under the MIT license.
 
 """
-# Version: 0.0.5
+# Version: 0.0.6
 setup(
     name="xphonebr",
-    version="0.0.5",
+    version="0.0.6",
     author="Emerson Pedroso",
     author_email="traderpedroso@icloud.com",
     description="Grapheme to phoneme conversion and tools for tts with deep learning.",
