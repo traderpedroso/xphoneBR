@@ -18,6 +18,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 class Phonemizer:
     def __init__(self, autoreg=False, normalizer=False, custom_model=None):
         self.model_path = self.download_model(autoreg)
+        # load custom model
         if custom_model:
             self.phones = ph.from_checkpoint(custom_model, device=device)
         else:
