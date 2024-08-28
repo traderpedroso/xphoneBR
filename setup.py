@@ -7,6 +7,7 @@ be accurate, fast, easy to use.
 DeepPhonemizerBR is compatible with Python 3.6+ and is distributed under the MIT license.
 
 """
+#
 # Version: 0.0.7
 setup(
     name="xphonebr",
