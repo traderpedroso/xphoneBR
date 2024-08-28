@@ -75,6 +75,63 @@ output: 'doutora. Ana tem quarenta e cinco por cento da empresa e companhia e in
 
 ```
 
+### Training
+
+You can easily train your own autoregressive or forward transformer model. 
+All necessary parameters are set in a config.yaml, which you can find under:
+```bash
+configs/forward_config.yaml
+configs/autoreg_config.yaml
+```
+for the forward and autoregressive transformer model, respectively.
+
+Download the pretrained model: [pt_br](https://huggingface.co/traderpedroso/phonemizerBR/tree/main)
+
+Inside the training script prepare data in a tuple-format and use the preprocess and train API:
+
+```python
+from dp.preprocess import preprocess
+from dp.train import train
+
+train_data = [('pt_br', 'Dra. Ana', "'dowˈtoɾə. ˈãnə"),
+                ('pt_br', 'tem 45%', 'tẽ kwaˈɾẽtə ˈi ˈsĩkʊ ˈpox ˈsẽtʊ')
+
+train_data = [('pt_br', 'Dra. Ana', "'dowˈtoɾə. ˈãnə"),
+                ('pt_br', 'tem 45%', 'tẽ kwaˈɾẽtə ˈi ˈsĩkʊ ˈpox ˈsẽtʊ') 
+
+config_file = 'configs/forward_config.yaml'
+
+preprocess(config_file=config_file,
+           train_data=train_data,
+           val_data=val_data,
+           deduplicate_train_data=False)
+
+num_gpus = torch.cuda.device_count()
+
+if num_gpus > 1:
+    mp.spawn(train, nprocs=num_gpus, args=(num_gpus, config_file))
+else:
+    train(rank=0, num_gpus=num_gpus, config_file=config_file)
+```
+Model checkpoints will be stored in the checkpoints path that is provided by the config.yaml.
+
+load model and inference custom model
+
+
+```python
+from xphonebr import Phonemizer
+
+
+phones = Phonemizer(autoreg=True, normalizer=True, custom_model="path/to/custom_model") 
+
+phones.phonemise("Dra. Ana tem 45% da empresa & cia e iniciou as 8:45 de quinta feira do ano 2024 etc.  ")
+
+output: 'dowˈtoɾə. ˈãnə ˈtẽ kwaˈɾẽtə ˈi ˈsĩkʊ ˈpox ˈsẽtʊ ˈda ẽˈpɾɛzə ˈi kõpãˈiə ˈi inisiˈow ˈas ˈoytʊ ˈɔɾəs ˈi kwaˈɾẽtə ˈi ˈsĩkʊ miˈnutʊs ˈdʒi ˈkĩtə ˈfeyɾə ˈdʊ ˈãnʊ ˈdoys ˈmiw ˈi ˈvĩtʃɪ ˈi ˈkwatɾʊ ˈit seˈteɾə.'
+
+```
+
+
+
 ## Contributing
 
 We welcome any contribution to `xphoneBR`. Here are some ways to contribute:
