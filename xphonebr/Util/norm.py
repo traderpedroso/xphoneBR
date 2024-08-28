@@ -65,18 +65,6 @@ abbreviations = [
         ("ghz", "giga-hertz"),
         ("km", "quilômetro"),
         ("ltda", "limitada"),
-        ("jan", "janeiro"),
-        ("fev", "fevereiro"),
-        ("mar", "março"),
-        ("abr", "abril"),
-        ("mai", "maio"),
-        ("jun", "junho"),
-        ("jul", "julho"),
-        ("ago", "agosto"),
-        ("set", "setembro"),
-        ("out", "outubro"),
-        ("nov", "novembro"),
-        ("dez", "dezembro"),
         ("pág", "página"),
         ("págs", "páginas"),
         ("s.a", "sociedade anônima"),
@@ -166,8 +154,12 @@ def _normalize_money(text):
         return f"{amount_text} {currency_text}"
 
     # Expressão regular para valores com milhões e bilhões
-    text = re.sub(r"(R\$|€|£|\$) (\d+)( milhões| bilhões)", money_to_words_millions, text)
-    text = re.sub(r"(R\$|€|£|\$)(\d+)( milhões| bilhões)", money_to_words_millions, text)
+    text = re.sub(
+        r"(R\$|€|£|\$) (\d+)( milhões| bilhões)", money_to_words_millions, text
+    )
+    text = re.sub(
+        r"(R\$|€|£|\$)(\d+)( milhões| bilhões)", money_to_words_millions, text
+    )
 
     # Expressão regular para valores com centavos
     text = re.sub(r"(R\$|€|£|\$) (\d+),(\d{2})", money_to_words_cents, text)
@@ -212,18 +204,17 @@ def _normalize_numbers_with_letters(text):
     )
 
 
-
 def normalizer(text):
-        text = _normalize_percentages(text)
-        text = _normalize_time(text)
-        text = _normalize_money(text)
-        text = _normalize_am_pm_times(text)
-        text = _normalize_numbers_with_letters(text)
-        text = _normalize_numbers(text)
-        text = _normalize_abbreviations(text)
-        text = replace_punctuation(text)
-        text = remove_aux_symbols(text)
-        text = remove_punctuation_at_begin(text)
-        text = collapse_whitespace(text)
-        text = re.sub(r"([^\.,!\?\-…])$", r"\1.", text)
-        return text
+    text = _normalize_percentages(text)
+    text = _normalize_time(text)
+    text = _normalize_money(text)
+    text = _normalize_am_pm_times(text)
+    text = _normalize_numbers_with_letters(text)
+    text = _normalize_numbers(text)
+    text = _normalize_abbreviations(text)
+    text = replace_punctuation(text)
+    text = remove_aux_symbols(text)
+    text = remove_punctuation_at_begin(text)
+    text = collapse_whitespace(text)
+    text = re.sub(r"([^\.,!\?\-…])$", r"\1.", text)
+    return text
